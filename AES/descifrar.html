@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="CSS/index.css">
+    <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
+    <script src="JS/FileSaver.js"></script>
+    <title>AES Descifrado</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">Cifrado AES</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Cifrar</a>
+              </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="descifrar.html">Descifrar</a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+    <br>
+    <br>
+
+    <center>
+        <div class="container">
+            <center><h4>Adjuntar Archivo</h4></center>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <div class="mb-4">
+                                <input class="btn btn-outline-secondary" type="file" id="file-input">
+                            </div>
+                            <div class="mb-4">
+                                <textarea id="cont-archivo" cols="60" rows="0" placeholder="Mensaje cifrado" readonly></textarea>
+                            </div> 
+                            <div class="mb-4">
+                                <textarea name="password" id="key" cols="80" rows="0" placeholder="Llave"></textarea>
+                            </div> 
+                            <button class="btn btn-outline-secondary" onclick="dc()">Descifrar</button>
+                        </div>
+                    </div >
+                </div>
+            </div>
+        </div>
+    </center>
+    
+    <br>
+
+    <center>
+        <div class="container">
+            <center><h4>Visualizar</h4></center>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <div class="mb-4">
+                                <textarea id="hexa" cols="80" rows="0" placeholder="Mensaje en hexadecimal" readonly></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <textarea id="demo99" cols="80" rows="0" placeholder="Mensaje original" readonly></textarea>
+                            </div>
+                            <center><h4>Tipo de Archivo</h4></center>
+                            <button id="pdf" class="btn btn-outline-info">PDF</button>
+                            <button id="txt" class="btn btn-outline-info">TXT</button>
+                        </div>
+                    </div >
+                </div>
+            </div>
+        </div>
+    </center>
+
+    <script>
+        $("#txt").click(function () {
+            var cth = document.getElementById("demo99").value;
+            var blob = new Blob([cth], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, "Descifrado.txt");
+
+        });
+    </script>
+    <script>
+        $("#pdf").click(function () {
+            var cth = document.getElementById("demo99").value;
+            var blob = new Blob([cth], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, "Descifrado.pdf");
+        });
+    </script>
+    <script src="JS/aes.js"></script>
+</body>
+
+</html>
